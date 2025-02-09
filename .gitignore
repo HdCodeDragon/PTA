@@ -1,8 +1,4 @@
-/.vscode
-/a.exe
-/build
 /CMakeLists.txt
-/main.cpp
-/main.exe
-/Study.cpp
-/Z_problem.md
+/.vscode
+/build
+.gitignore

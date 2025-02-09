@@ -17,6 +17,7 @@
 using namespace std;
 int main()
 {
+    int sm;
     int cm;
     cin >> cm;
     int foot, inch;
