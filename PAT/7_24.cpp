@@ -22,31 +22,35 @@
 using namespace std;
 int main()
 {
-    unsigned up, down;
-    char c1;
-    cin >> up >> c1 >> down;
-    if (up > down)
+    unsigned numerator, denominator;
+    char slash;
+    cin >> numerator >> slash >> denominator;
+    if (numerator < denominator)
     {
-        cout << up << c1 << down;
-    }
-    else if (up == down)
-    {
-        cout << 1 << c1 << 1;
-    }
-    else
-    {
-        int i = 2;
-        while (i < down)
+        for (unsigned i = 2; i <= numerator; i++)
         {
-            if ((up / i > 1 && up % i == 0) && (down / i > 1 && down % i == 0))
+            if (((numerator % i) == 0) && ((denominator % i) == 0))
             {
-                up /= i;
-                down /= i;
-                i = 1;
+                numerator /= i;
+                denominator /= i;
+                i = 1; // 由于表达式最后会i++
             }
-            i++;
         }
-        cout << up << c1 << down;
+        cout << numerator << slash << denominator << endl;
+    }
+    else if (numerator == denominator)
+    {
+        cout << "1/1" << endl;
+    }
+    else if (numerator > denominator)
+    {
+        cout << numerator << slash << denominator << endl;
     }
     return 0;
 }
+/*
+更好的做法是在找到一个公约数后继续从当前的i值开始检查下一个可能的公约数。
+然而，由于您已经使用了从2到numerator的循环，
+并且每次找到公约数后都进行了除法操作，这实际上已经隐含地跳过了那些已经被约掉的因子
+*/
+// 化简用的辗转相除法

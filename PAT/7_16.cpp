@@ -19,43 +19,47 @@
 给定不超过6的正整数A，考虑从A开始的连续4个数字。请输出所有由它们组成的无重复数字的3位数
 */
 #include <iostream>
+#include <vector>
 using namespace std;
 int main()
 {
     int A;
-    int num = 0;
     cin >> A;
-    unsigned flag = 0;
-    for (int i = A; i < A + 4; i++)
+    vector<int> vec(4);
+    for (int i = 0; i < vec.size(); i++)
     {
-        // int counter = 0; // 计数器解决空格问题
-        for (int j = A; j < A + 4; j++)
+        vec[i] = A + i;
+    }
+    // 4个数字无重复组合 C14*C13*C12
+    for (int i = 0; i < vec.size(); i++)
+    {
+        int flag = 0;
+        int num1 = vec[i] * 100;
+        for (int j = 0; j < vec.size(); j++)
         {
             if (j == i)
             {
                 continue;
             }
-            for (int k = A; k < A + 4; k++)
+            int num2 = vec[j] * 10;
+            num2 += num1;
+            for (int k = 0; k < vec.size(); k++)
             {
                 if (k == i || k == j)
                 {
                     continue;
                 }
-                else
+                int num3 = vec[k];
+                num3 = num3 + num2;
+                if (flag == 5)
                 {
-                    num += i * 100 + j * 10 + k;
-                }
-                flag++; // 烧饼
-                if (flag % 6 == 0)
-                {
-                    cout << num;
+                    cout << num3;
                 }
                 else
                 {
-                    cout << num << " ";
+                    cout << num3 << " ";
+                    flag++;
                 }
-
-                num = 0;
             }
         }
         cout << endl;

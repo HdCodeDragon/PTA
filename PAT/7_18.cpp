@@ -1,56 +1,42 @@
-
 #include <iostream>
 #include <cmath>
-#include <iomanip>
 using namespace std;
 // 存在唯一单根
-static double coefficient1, coefficient2, coefficient3, coefficient4;
+double a3, a2, a1, a0;
 double Func(double x)
 {
-    return (coefficient1 * x * x * x) + (coefficient2 * x * x) + (coefficient3 * x) + coefficient4;
+    double y = a3 * pow(x, 3) + a2 * pow(x, 2) + a1 * x + a0;
+    return y;
 }
-int main()
+double BinaryRoot(double a, double b, double threshold)
 {
-    double border_dot1, border_dot2;
-    // 全局变量
-    cin >> coefficient1 >> coefficient2 >> coefficient3 >> coefficient4;
-    cin >> border_dot1 >> border_dot2;
-    double Func_A, Func_B;
-    Func_A = Func(border_dot1);
-    Func_B = Func(border_dot2);
-    // 判断端点是否有根
-    while ((Func_A * Func_B) < 0)
+    // f1 * f2 < 0的情况
+    double f1 = Func(a);
+    double f2 = Func(b);
+    double root = 0;
+    double midPoint = (a + b) / 2.0;
+    double func_midPoint = Func((a + b) / 2.0);
+    if (f1*f2 == 0)
     {
-        double mid_dot = (border_dot1 + border_dot2) / 2;
-        double Func_mid = Func(mid_dot);
-        if (Func_mid != 0)
-        {
-            if (Func_mid * Func_A < 0)
-            {
-                border_dot2 = mid_dot;
-                Func_B = Func(border_dot2);
-                // Func_A = mid_dot;
-            }
-            else
-            {
-                border_dot1 = mid_dot;
-                Func_A = Func(border_dot1);
-            }
-        }
-        else
-        {
-            cout << fixed << setprecision(2) << mid_dot;
-            break;
-        }
+        root = 0;
+        return root;
     }
-    if (Func_A == 0)
+    if (func_midPoint == 0)
     {
-        cout << fixed << setprecision(2) << border_dot1;
-    }
-    if (Func_B == 0)
-    {
-        cout << fixed << setprecision(2) << border_dot2;
+        root = midPoint;
     }
 
+    return root;
+}
+
+int main()
+{
+    double endPoint1, endPoint2;
+    cin >> a3 >> a2 >> a1 >> a0;
+    cin >> endPoint1 >> endPoint2;
+
+    double root = BinaryRoot(endPoint1, endPoint2, threshold);
     return 0;
 }
+// 全局函数的使用 当中点很小，运行超时问题（精度问题） inline函数全局函数 
+// 递归写的不是很好，有很多缺陷

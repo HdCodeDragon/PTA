@@ -19,39 +19,45 @@
 using namespace std;
 int main()
 {
-    unsigned distance_R = 0, distance_T = 0;
-    unsigned T;
-    cin >> T;
-    unsigned flag = 0;
-
-    for (int i = 1; i <=T; i++)
+    int speedR = 9, speedT = 3;
+    int distanceR = 0, distanceT = 0;
+    unsigned time;
+    cin >> time;
+    unsigned timeInterval = time / 10;
+    while (timeInterval != 0)
     {
-        distance_T += 3;
-        if (flag == 0)
+        if (distanceR > distanceT)
         {
-            distance_R += 9;
+            speedR = 0;
         }
         else
         {
-            flag--;
+            speedR = 9;
         }
-        if (i % 10 == 0 && (distance_R > distance_T))
-        {
-            flag += 30;
-        }
+        distanceR += speedR * 10;
+        distanceT += speedT * 10;
+        timeInterval--;
     }
-    if (distance_R > distance_T)
+    if (distanceR > distanceT)
     {
-        cout << "^_^ " << distance_R;
-    }
-    else if (distance_T > distance_R)
-    {
-        cout << "@_@ " << distance_T;
+        distanceT += (time % 10) * speedT;
     }
     else
     {
-        cout << "-_- " << distance_T;
+        distanceR += (time % 10) * speedR;
+        distanceT += (time % 10) * speedT;
     }
-
+    if (distanceR > distanceT)
+    {
+        cout << "^_^ " << distanceR << endl;
+    }
+    else if (distanceT > distanceR)
+    {
+        cout << "@_@ " << distanceT << endl;
+    }
+    else
+    {
+        cout << "-_- " << distanceT << endl;
+    }
     return 0;
 }

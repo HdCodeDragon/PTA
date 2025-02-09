@@ -16,27 +16,42 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+long Factorial(int n)
+{
+    if (n == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return Factorial(n - 1) * n;
+    }
+}
+long Function(int n)
+{
+    int num = 1;
+    for (int i = 0; i <= n; i++)
+    {
+        num *= 2 * i + 1;
+    }
+    return num;
+}
 int main()
 {
-    float threshold;
+    double threshold;
+    double pai = 0;
     cin >> threshold;
-    double factorial = 1;
-    double odd_factorial = 1;
-    float hlaf_pai = 0;
-    float first_item = 1;
-    float end_item = first_item;
-    for (int i = 1; end_item >= threshold; i++)
+    int flag;
+    for (int i = 0; static_cast<double>(Factorial(i)) / static_cast<double>(Function(i)) >= threshold; i++)
     {
-        factorial *= i;
-        odd_factorial *= 2 * i + 1;
-        hlaf_pai += factorial / odd_factorial;
-        // cout << hlaf_pai << " ";
-        end_item = factorial / odd_factorial;
+        pai += static_cast<double>(Factorial(i)) / static_cast<double>(Function(i));
+        flag = i;
     }
-    hlaf_pai += first_item;
-
-    cout.setf(ios::fixed);
-
-    cout << setprecision(6) << 2 * hlaf_pai;
+    flag++;
+    pai += static_cast<double>(Factorial(flag)) / static_cast<double>(Function(flag));
+    pai *= 2.0;
+    cout.precision(6);
+    cout << fixed << pai;
     return 0;
 }
+// 本文递归如何找尾递归问题 N会超长整型
