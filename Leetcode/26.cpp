@@ -1,4 +1,5 @@
 // 唯一化，计算_size
+// 双指针法唯一化
 #include <vector>
 class Solution
 {
