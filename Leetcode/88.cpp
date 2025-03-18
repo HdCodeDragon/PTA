@@ -8,28 +8,32 @@ class Solution
 public:
     void merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n)
     {
-        for (int i = 0; i < n; i++)
+        int ptr1 = m - 1;
+        int ptr2 = n - 1;
+        for (int i = (m + n - 1); i >= 0; i--)
         {
-        }
-    }
-    int Binaryfind(std::vector<int> &nums, int lo, int hi, int target)
-    {
-        while (lo <= hi)
-        {
-            int mid = lo + (hi - lo) / 2;
-            if (nums[mid] == target)
+            if (ptr1 < 0)
             {
-                return mid;
+                nums1[i] = nums2[ptr2];
+                ptr2--;
+                continue;
             }
-            else if (nums[mid] < target)
+            if (ptr2 < 0)
             {
-                lo = mid + 1;
+                nums1[i] = nums1[ptr1];
+                ptr1--;
+                continue;
+            }
+            if (nums1[ptr1] >= nums2[ptr2])
+            {
+                nums1[i] = nums1[ptr1];
+                ptr1--;
             }
             else
             {
-                hi = mid - 1;
+                nums1[i] = nums2[ptr2];
+                ptr2--;
             }
         }
-        return lo;
     }
 };
