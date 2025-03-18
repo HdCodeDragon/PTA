@@ -1,0 +1,20 @@
+#include <vector>
+// 暴力O(N*N)
+// 设计算法 引用额外内存nums 运算时间O(N)
+// 排序，遍历，O（nLogN）
+// 描述算法步骤
+// 异或运算是最好解法
+class Solution
+{
+public:
+    int singleNumber(std::vector<int> &nums)
+    {
+        auto flag = *(nums.begin());
+        for (auto &i : nums)
+        {
+            if (i == flag)
+            {
+            }
+        }
+    }
+};
