@@ -5,6 +5,9 @@
 
 你可以按任意顺序返回答案。
 */
+// 有序左右指针必然可以复杂，排序，左右指针找到数，查找数
+// 无序左右指针可以吗 不可以
+// 哈希表了
 #include <iostream>
 #include <array>
 #include <vector>
@@ -13,19 +16,19 @@ class Solution
 public:
     std::vector<int> twoSum(std::vector<int> &nums, int target)
     {
-        int n = nums.size();
-        for (int i = 0; i < n; i++)
+        int fast = 0;
+        int slow = 0;
+        while (fast < nums.size())
         {
-            for (int j = i + 1; j < n; j++)
+            int sum = nums[fast] + nums[slow];
+            if (sum < target)
             {
-                if ((i != j) && (nums[i] + nums[j]) == target)
-                {
-                    return {i, j};
-                    // std::cout << "[" << i << "," << j << "]" << std::endl;
-                }
+            }
+            else if (sum > target)
+            {
             }
         }
-        return {};
+        return {slow, fast};
     }
 };
 int main()
