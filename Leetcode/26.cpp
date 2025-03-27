@@ -26,3 +26,27 @@ public:
 };
 // 迭代器失效 erase()返回一个迭代器已经失效的迭代器不能进行++操作，所以程序中断了。
 // 不过vector的erase操作可以返回下一个有效的迭代器，所以只要我们每次执行删除操作的时候，将下一个有效迭代器返回
+class Solution
+{
+public:
+    int removeDuplicates(std::vector<int> &nums)
+    {
+        //
+        int fast = 0;
+        int slow = 0;
+        int _size = nums.size();
+        while (fast < _size)
+        {
+            if (nums[fast] == nums[slow])
+            {
+                ++fast;
+            }
+            else
+            {
+                ++slow;
+                nums[slow] = nums[fast];
+            }
+        }
+        return slow + 1;
+    }
+};
