@@ -1,4 +1,6 @@
-
+// #include<vector>
+#include <vector>
+#include <stack>
 struct TreeNode
 {
     int val;
@@ -7,9 +9,8 @@ struct TreeNode
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-}
+};
 // µ›πÈ÷––Ú±È¿˙
-#include <vector>
 class Solution
 {
 public:
@@ -45,3 +46,32 @@ struct TreeNode
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
+
+void visitLeftBranch(TreeNode *root, std::stack<TreeNode *> &S)
+{
+    // ◊Û◊” ˜»Î’ª
+    while (root)
+    {
+        S.push(root);
+        root = root->left;
+    }
+}
+
+std::vector<int> inorderTraverse(TreeNode *root)
+{
+    std::vector<int> res{};
+    std::stack<TreeNode *> S{};
+    while (true)
+    {
+        visitLeftBranch(root, S);
+        if (!S.empty())
+        {
+            break;
+        }
+        root = S.top();
+        res.push_back(root->val);
+        S.pop();
+        root = root->right;
+    }
+    return res;
+}
