@@ -64,14 +64,14 @@ std::vector<int> inorderTraverse(TreeNode *root)
     while (true)
     {
         visitLeftBranch(root, S);
-        if (!S.empty())
+        if (S.empty())
         {
             break;
         }
         root = S.top();
         res.push_back(root->val);
-        S.pop();
         root = root->right;
+        S.pop();
     }
     return res;
 }
