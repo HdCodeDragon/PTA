@@ -21,21 +21,21 @@ public:
         {
             if (list1->val < list2->val)
             {
-                list.next = list1;
+                head->next = list1;
                 list1 = list1->next;
             }
             else
             {
-                list.next = list2;
+                head->next = list2;
                 list2 = list2->next;
             }
-            list = *(list.next);
+            // 这里并没有移动
+            head = head->next;
         }
-        list.next = (list1 == nullptr ? list2 : list1);
-        return head->next;
+        head->next = (list1 == nullptr ? list2 : list1);
+        return list.next;
     }
 };
-
 /*
 class Solution
 {
